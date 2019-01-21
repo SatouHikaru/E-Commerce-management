@@ -70,20 +70,6 @@ public class TelevisionController {
 	}
 
 	/**
-	 * Count list of televisions quantity by key search
-	 *
-	 * @author Pham Nguyen Ha Quang
-	 * @since  29/12/2018
-	 *
-	 * @param name
-	 * @return long
-	 */
-	@GetMapping("/televisions/count/{keySearch}")
-	public long count(@PathVariable("keySearch") String name) {
-		return televisionServiceImpl.count(name);
-	}
-
-	/**
 	 * Get list of televisions per page
 	 *
 	 * @author Pham Nguyen Ha Quang

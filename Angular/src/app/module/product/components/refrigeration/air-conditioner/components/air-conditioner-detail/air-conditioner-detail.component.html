@@ -1,0 +1,77 @@
+<nav></nav>
+<div class="product_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <img src="{{airConditioner.image}}" alt="{{airConditioner.name}}" width="380" height="380">
+            </div>
+            <div class="col-lg-7">
+                <div class="product_details_text">
+                    <h3>{{airConditioner.name}}</h3>
+                    <ul class="p_rating">
+                        <li><a><i class="fa fa-star"></i></a></li>
+                        <li><a><i class="fa fa-star"></i></a></li>
+                        <li><a><i class="fa fa-star"></i></a></li>
+                        <li><a><i class="fa fa-star"></i></a></li>
+                        <li><a><i class="fa fa-star"></i></a></li>
+                    </ul>
+                    <h4>{{airConditioner.price | number}} VND</h4>
+                    <div class="quantity">
+                        <div class="custom">
+                            <button type="button" class="reduced items-count" (click)="subtract()"><i class="icon_minus-06"></i></button>
+                            <input type="text" class="input-text qty" title="Quantity:"
+                                    [(ngModel)]="quantitySelected" (change)="checkQuantity()">
+                            <button type="button" class="increase items-count" (click)="add()"><i class="icon_plus"></i></button>
+                        </div>
+                        <div class="custom quantity">
+                            <h3>{{airConditioner.quantity}} sản phẩm có sẵn</h3>
+                        </div>
+                    </div>
+                    <button class="btn add_cart_btn" (click)="addToCart()">Thêm vào giỏ hàng</button>
+                    <button class="btn add_cart_btn buy" (click)="buy()">Mua ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================End Product Details Area =================-->
+
+<!--================Product Description Area =================-->
+<div class="product_description_area">
+    <div class="container">
+        <div class="tab_menu">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                        aria-controls="nav-home" aria-selected="true">Mô tả</a>
+                <a class="nav-item nav-link" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab"
+                        aria-controls="nav-info" aria-selected="false">Thông số kỹ thuật</a>
+            </div>
+        </div>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <p>{{airConditioner.description}}</p>
+            </div>
+            <div class="tab-pane fade show" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Khối lượng</td>
+                        <td>{{airConditioner.weight}}</td>
+                    </tr>
+                    <tr>
+                        <td>Thể tích phòng sử dụng</td>
+                        <td>{{airConditioner.roomVolume}}</td>
+                    </tr>
+                    <tr>
+                        <td>Công suất lạnh</td>
+                        <td>{{airConditioner.coldCapacity}}</td>
+                    </tr>
+                    <tr>
+                      <td>Gas</td>
+                      <td>{{airConditioner.gas}}</td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer></footer>

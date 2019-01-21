@@ -1,0 +1,64 @@
+<nav></nav>
+<div class="shopping_cart_area p_100">
+    <div class="container">
+        <button type="button" class="btn btn-danger" (click)="delete()">Xoá giỏ hàng</button>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart_product_list">
+                    <h3 class="cart_single_title text-center">Giỏ hàng</h3>
+                    <div class="table-responsive-md">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" colspan="2">Sản phẩm</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of products">
+                                    <th scope="row">
+                                        <p class="remove" (click)="removeProduct(product.id, product.quantity, product.name)">X</p>
+                                    </th>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="{{product.image}}" alt="" width="100px" height="100px">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>{{product.name}}</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>{{product.price | number}} VND</p>
+                                    </td>
+                                    <td>
+                                        <p><i class="icon_minus-06" (click)="subtractQuantity(product)"></i> {{product.quantity}} <i class="icon_plus" (click)="addQuantity(product)"></i></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="total_amount_area">
+                    <div class="cart_totals_area">
+                        <h4 class="text-center">{{title}}</h4>
+                        <div class="total_amount row m0 row_disable">
+                            <div class="float-left">Tổng</div>
+                            <div class="float-right">{{total | number}} VND</div>
+                        </div>
+                        <div class="col checkout text-center">
+                            <a target="_blank" href="https://www.nganluong.vn/button_payment.php?receiver=sakaru0122@gmail.com&product_name={{orderTitle}}&price={{total}}&comments=">
+                                <img src="https://www.nganluong.vn/css/newhome/img/button/safe-pay-3.png" border="0"
+                                        (click)="checkOut()" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer></footer>

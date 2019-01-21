@@ -1,0 +1,107 @@
+<admin-product-nav></admin-product-nav>
+<div class="container">
+    <div class="categories_main_inner">
+        <div class="row row_disable">
+            <h3 class="text-center">DANH SÁCH TI VI</h3>
+            <div class="row filter ml-1 mt-5">
+                <div class="col-lg-2">
+                    <h5>Thương hiệu</h5>
+                    <div class="custom-control custom-checkbox mt-2 mb-2">
+                        <input type="checkbox" class="custom-control-input" id="checkBoxAllBrands" name="all"
+                            [(ngModel)]="checkBoxAllBrands" (click)="checkSelectAllBrands($event)">
+                        <label class="custom-control-label" for="checkBoxAllBrands">Tất cả</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2" *ngFor="let brand of brands">
+                        <input type="checkbox" class="custom-control-input" id="{{brand.name}}" [(ngModel)]="brand.checked"
+                            (click)="selectBrand($event, brand.name)">
+                        <label class="custom-control-label" for="{{brand.name}}">{{brand.name}}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="price" [(ngModel)]="isSelectPrice"
+                            (click)="selectPrice($event)">
+                        <label class="custom-control-label" for="price">
+                            <h5>Mức giá</h5>
+                        </label>
+                    </div>
+
+                    <div [className]="isSelectPrice ? '' : 'd-none'">
+                        <div class="input-group mt-2">
+                            <h6>Từ:</h6>
+                            <input type="range" class="slider admin" id="priceFrom_admin" min="10000" max="89990000"
+                                [(ngModel)]="priceFrom" (change)="updatePriceRange()">
+                            <h6>{{priceFrom | number}} VND</h6>
+                        </div>
+
+                        <div class="input-group mt-3">
+                            <h6>Đến:</h6>
+                            <input type="range" class="slider admin" id="priceFrom" min="20000" max="90000000"
+                                [(ngModel)]="priceTo" (change)="updatePriceRange()">
+                            <h6>{{priceTo | number}} VND</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 input-group">
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" [(ngModel)]="keySearch" aria-label="Search">&nbsp;&nbsp;
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" [className]="keySearch == '' && brandName.length == 0 && priceTo == 0 ? 'btn disabled' : 'btn'"
+                                (click)="getByFilter(currentPage - 1)">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <button type="button" class="btn btn-success" (click)="getAll()">Toàn bộ sản phẩm</button>&nbsp;
+                <button type="button" class="btn btn-primary" routerLink="/admin/electrics/television">Thêm</button>&nbsp;
+                <button type="button" [className]="!isSelected ? 'btn btn-danger disabled' : 'btn btn-danger'" (click)="delete()">Xoá</button>
+            </div>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th class="align-middle text-right">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="allProduct" [(ngModel)]="checkBoxAllProducts"
+                                    (click)="checkSelectAllProducts($event)">
+                                <label class="custom-control-label pt-3" for="allProduct"></label>
+                            </div>
+                        </th>
+                        <th class="align-middle text-center">Mã</th>
+                        <th class="align-middle text-center" colspan="2">Tên</th>
+                        <th class="align-middle text-center">Giá</th>
+                        <th class="align-middle text-center">Số lượng</th>
+                        <th class="align-middle text-center">Xuất xứ</th>
+                        <th class="align-middle text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let television of pagedItems">
+                    <tr>
+                        <td class="align-middle text-right">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="{{television.id}}" [(ngModel)]="television.checked"
+                                    (click)="selectProduct($event, television.id)">
+                                <label class="custom-control-label pt-3" for="{{television.id}}"></label>
+                            </div>
+                        </td>
+                        <td class="align-middle text-center">{{television.id}}</td>
+                        <td><img src="{{television.image}}" alt="{{television.name}}" width="100"></td>
+                        <td class="align-middle">{{television.name}}</td>
+                        <td class="align-middle text-center">{{television.price | number}} VND</td>
+                        <td class="align-middle text-center">{{television.quantity}}</td>
+                        <td class="align-middle text-center">{{television.countryOfOrigin}}</td>
+                        <td class="align-middle text-center">
+                            <button type="button" class="btn btn-info" (click)="seeDetail(television.name)">Xem</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <pagination [currentPage]=(currentPage) [setTotalItems]=(totalItems) (changePage)="pageChanged($event)"></pagination>
+            </div>
+        </div>
+    </div>
+</div>

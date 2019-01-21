@@ -1,0 +1,127 @@
+<nav></nav>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Đăng ký tài khoản</h4>
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="userName">Tên tài khoản</label>
+            <input type="text" class="form-control" name="userName" formControlName="userName" [(ngModel)]="account.userName"
+              [ngClass]="{
+                  'is-invalid': registerForm.get('userName').invalid && registerForm.get('userName').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="registerForm.get('userName').errors && (registerForm.get('userName').touched || registerForm.get('userName').dirty)">
+              <div *ngIf="registerForm.get('userName').errors.required">Bắt buộc</div>
+              <div *ngIf="registerForm.get('userName').errors.minlength">Tên đăng nhập phải có tối thiểu 6 ký tự</div>
+              <div *ngIf="registerForm.get('userName').errors.maxlength">Tên đăng nhập chỉ có tối đa 40 ký tự</div>
+            </div>
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="accountMessage != ''">
+            {{accountMessage}}
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" class="form-control" name="password" formControlName="password" [(ngModel)]="account.password"
+              [ngClass]="{
+                  'is-invalid': registerForm.get('password').invalid && registerForm.get('password').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="registerForm.get('password').errors && (registerForm.get('password').touched || registerForm.get('password').dirty)">
+              <div *ngIf="registerForm.get('password').errors.required">Bắt buộc</div>
+              <div *ngIf="registerForm.get('password').errors.minlength">Mật khẩu phải có tối thiểu 6 ký tự</div>
+              <div *ngIf="registerForm.get('password').errors.maxlength">Mật khẩu chỉ có tối đa 40 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Xác nhận mật khẩu</label>
+            <input type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword" [(ngModel)]="password"
+              [ngClass]="{
+                    'is-invalid': registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').errors && (registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').dirty)">
+              <div *ngIf="registerForm.get('confirmPassword').errors.required">Bắt buộc</div>
+              <div *ngIf="registerForm.get('confirmPassword').errors.minlength">Mật khẩu phải có tối thiểu 6 ký tự</div>
+              <div *ngIf="registerForm.get('confirmPassword').errors.maxlength">Mật khẩu chỉ có tối đa 40 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Họ tên</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="customer.name"
+              [ngClass]="{
+                  'is-invalid': registerForm.get('name').invalid && registerForm.get('name').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="registerForm.get('name').errors && (registerForm.get('name').touched || registerForm.get('name').dirty)">
+              <div *ngIf="registerForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="registerForm.get('name').errors.minlength">Họ tên phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="registerForm.get('name').errors.maxlength">Họ tên chỉ có tối đa 60 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Giới tính</label> <br>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Nam" id="male" name="gender" formControlName="gender"
+                [(ngModel)]="customer.gender" />
+              <label class="custom-control-label" for="male">Nam</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Nữ" id="female" name="gender" formControlName="gender"
+                [(ngModel)]="customer.gender" />
+              <label class="custom-control-label" for="female">Nữ</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="birthday">Ngày sinh</label>
+            <input type="date" class="form-control" name="birthday" formControlName="birthday" [(ngModel)]="customer.birthday"
+              [ngClass]="{
+                  'is-invalid': registerForm.get('birthday').invalid && registerForm.get('birthday').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="registerForm.get('birthday').errors && (registerForm.get('birthday').touched || registerForm.get('birthday').dirty)">
+              <div *ngIf="registerForm.get('birthday').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Điện thoại</label>
+            <input type="text" class="form-control" name="phone" formControlName="phone" [(ngModel)]="customer.phone"
+              [ngClass]="{
+                  'is-invalid': registerForm.get('phone').invalid && registerForm.get('phone').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="registerForm.get('phone').errors && (registerForm.get('phone').touched || registerForm.get('phone').dirty)">
+              <div *ngIf="registerForm.get('phone').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" formControlName="email" [(ngModel)]="customer.email"
+              [ngClass]="{
+                  'is-invalid': registerForm.get('email').invalid && registerForm.get('email').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="registerForm.get('email').errors && (registerForm.get('email').touched || registerForm.get('name').dirty)">
+              <div *ngIf="registerForm.get('email').errors.required">Bắt buộc</div>
+              <div *ngIf="registerForm.get('email').errors.minlength">Email phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="registerForm.get('email').errors.maxlength">Email chỉ có tối đa 60 ký tự</div>
+            </div>
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="passwordMessage != ''">
+            {{passwordMessage}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-warning">Huỷ</button>
+          <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Đăng ký</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<footer></footer>

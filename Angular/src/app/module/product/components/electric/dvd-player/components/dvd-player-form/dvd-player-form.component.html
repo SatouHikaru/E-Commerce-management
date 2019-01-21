@@ -1,0 +1,129 @@
+<admin-product-nav></admin-product-nav>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Thêm đầu đĩa DVD</h4>
+      <form [formGroup]="dvdPlayerForm" (ngSubmit)="add()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="dvdPlayer.name"
+              [ngClass]="{
+                    'is-invalid': dvdPlayerForm.get('name').invalid && dvdPlayerForm.get('name').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="dvdPlayerForm.get('name').errors && (dvdPlayerForm.get('name').touched || dvdPlayerForm.get('name').dirty)">
+              <div *ngIf="dvdPlayerForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="dvdPlayerForm.get('name').errors.minlength">Tên sản phẩm phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="dvdPlayerForm.get('name').errors.maxlength">Tên sản phẩm chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Ảnh sản phẩm</label>
+            <div class="custom-file">
+              <img [src]="image" class="upload-thumbnail" width="200" height="200" />
+              <input type="file" class="form-control-file border" accept="image/jpeg, image/png" formControlName="image"
+                [(ngModel)]="dvdPlayer.image" (change)="previewImage($event)" [ngClass]="{
+                      'is-invalid': dvdPlayerForm.get('image').invalid && dvdPlayerForm.get('image').touched
+                    }" />
+            </div>
+            <div class="invalid-feedback" *ngIf="dvdPlayerForm.get('image').errors && (dvdPlayerForm.get('image').touched || dvdPlayerForm.get('image').dirty)">
+              <div *ngIf="dvdPlayerForm.get('image').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control" name="price" formControlName="price" [(ngModel)]="dvdPlayer.price"
+              [ngClass]="{
+                    'is-invalid': dvdPlayerForm.get('price').invalid && dvdPlayerForm.get('price').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="dvdPlayerForm.get('price').errors && (dvdPlayerForm.get('price').touched || dvdPlayerForm.get('price').dirty)">
+              <div *ngIf="dvdPlayerForm.get('price').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="number" class="form-control" name="quantity" formControlName="quantity" [(ngModel)]="dvdPlayer.quantity"
+              [ngClass]="{
+                    'is-invalid': dvdPlayerForm.get('quantity').invalid && dvdPlayerForm.get('quantity').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="dvdPlayerForm.get('quantity').errors && (dvdPlayerForm.get('quantity').touched || dvdPlayerForm.get('quantity').dirty)">
+              <div *ngIf="dvdPlayerForm.get('quantity').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="weight">Trọng lượng</label>
+            <input type="text" class="form-control" name="weight" formControlName="weight" [(ngModel)]="dvdPlayer.weight"
+              [ngClass]="{
+                      'is-invalid': dvdPlayerForm.get('weight').invalid && dvdPlayerForm.get('weight').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="dvdPlayerForm.get('weight').errors && (dvdPlayerForm.get('weight').touched || dvdPlayerForm.get('weight').dirty)">
+              <div *ngIf="dvdPlayerForm.get('weight').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="usb">USB</label> <br>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Có" id="yes" name="usb" formControlName="usb"
+                [(ngModel)]="dvdPlayer.usb" />
+              <label class="custom-control-label" for="yes">Có</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Không" id="no" name="usb" formControlName="usb"
+                [(ngModel)]="dvdPlayer.usb" />
+              <label class="custom-control-label" for="no">Không</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="size">Kích thước</label>
+            <input type="text" class="form-control" name="size" formControlName="size" [(ngModel)]="dvdPlayer.size"
+              [ngClass]="{
+                  'is-invalid': dvdPlayerForm.get('size').invalid && dvdPlayerForm.get('size').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="dvdPlayerForm.get('size').errors && (dvdPlayerForm.get('size').touched || dvdPlayerForm.get('size').dirty)">
+              <div *ngIf="dvdPlayerForm.get('size').errors.required">Bắt buộc</div>
+              <div *ngIf="dvdPlayerForm.get('size').errors.minlength">Kích thước sản phẩm phải có tối thiểu 12 ký tự</div>
+              <div *ngIf="dvdPlayerForm.get('size').errors.maxlength">Kích thước sản phẩm chỉ được tối đa là 20 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="brand">Thương hiệu</label>
+            <select class="form-control" name="brand" formControlName="brand"
+                [ngClass]="{
+                  'is-invalid': dvdPlayerForm.get('brand').invalid && dvdPlayerForm.get('brand').touched
+                }">
+              <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="dvdPlayerForm.get('brand').errors && (dvdPlayerForm.get('brand').touched || dvdPlayerForm.get('brand').dirty)">
+              <div *ngIf="dvdPlayerForm.get('brand').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" name="description" formControlName="description" [(ngModel)]="dvdPlayer.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Xuất xứ</label>
+            <input type="text" class="form-control" name="countryOfOrigin" formControlName="countryOfOrigin"
+              [(ngModel)]="dvdPlayer.countryOfOrigin" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-warning">Huỷ</button>
+          <button type="submit" class="btn btn-success" [disabled]="!dvdPlayerForm.valid">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

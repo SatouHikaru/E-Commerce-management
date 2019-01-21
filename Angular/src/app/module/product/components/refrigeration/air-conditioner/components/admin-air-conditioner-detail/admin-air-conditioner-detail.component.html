@@ -1,0 +1,120 @@
+<admin-product-nav></admin-product-nav>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Thêm điều hoà</h4>
+      <form [formGroup]="airConditionerForm" (ngSubmit)="update()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="airConditioner.name"
+              [ngClass]="{
+                    'is-invalid': airConditionerForm.get('name').invalid && airConditionerForm.get('name').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="airConditionerForm.get('name').errors && (airConditionerForm.get('name').touched || airConditionerForm.get('name').dirty)">
+              <div *ngIf="airConditionerForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="airConditionerForm.get('name').errors.minlength">Tên sản phẩm phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="airConditionerForm.get('name').errors.maxlength">Tên sản phẩm chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Ảnh sản phẩm</label>
+            <div class="custom-file">
+              <img [src]="image" class="upload-thumbnail" width="200" height="200" />
+              <input type="file" class="form-control-file border" accept="image/jpeg, image/png" formControlName="image" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control" name="price" formControlName="price" [(ngModel)]="airConditioner.price"
+              [ngClass]="{
+                    'is-invalid': airConditionerForm.get('price').invalid && airConditionerForm.get('price').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="airConditionerForm.get('price').errors && (airConditionerForm.get('price').touched || airConditionerForm.get('price').dirty)">
+              <div *ngIf="airConditionerForm.get('price').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="number" class="form-control" name="quantity" formControlName="quantity" [(ngModel)]="quantity"
+              [ngClass]="{
+                    'is-invalid': airConditionerForm.get('quantity').invalid && airConditionerForm.get('quantity').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="airConditionerForm.get('quantity').errors && (airConditionerForm.get('quantity').touched || airConditionerForm.get('quantity').dirty)">
+              <div *ngIf="airConditionerForm.get('quantity').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="weight">Khối lượng</label>
+            <input type="text" class="form-control" name="weight" formControlName="weight" [(ngModel)]="airConditioner.weight" />
+          </div>
+
+          <div class="form-group">
+            <label for="roomVolume">Thể tích phòng sử dụng</label>
+            <input type="text" class="form-control" name="roomVolume" formControlName="roomVolume" [(ngModel)]="airConditioner.roomVolume"
+              [ngClass]="{
+                      'is-invalid': airConditionerForm.get('roomVolume').invalid && airConditionerForm.get('roomVolume').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="airConditionerForm.get('roomVolume').errors && (airConditionerForm.get('roomVolume').touched || airConditionerForm.get('roomVolume').dirty)">
+              <div *ngIf="airConditionerForm.get('roomVolume').errors.required">Bắt buộc</div>
+              <div *ngIf="airConditionerForm.get('roomVolume').errors.maxlength">Thông tin thể tích phòng sử dụng chỉ được tối đa là 20 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="coldCapacity">Công suất lạnh</label>
+            <input type="text" class="form-control" name="coldCapacity" formControlName="coldCapacity" [(ngModel)]="airConditioner.coldCapacity"
+              [ngClass]="{
+                      'is-invalid': airConditionerForm.get('coldCapacity').invalid && airConditionerForm.get('coldCapacity').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="airConditionerForm.get('coldCapacity').errors && (airConditionerForm.get('coldCapacity').touched || airConditionerForm.get('coldCapacity').dirty)">
+              <div *ngIf="airConditionerForm.get('coldCapacity').errors.required">Bắt buộc</div>
+              <div *ngIf="airConditionerForm.get('coldCapacity').errors.maxlength">Thông tin công suất lạnh chỉ được tối đa là 20 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gas">Gas</label>
+            <select class="form-control" name="gas" formControlName="gas" [(ngModel)]="airConditioner.gas" [ngClass]="{
+                      'is-invalid': airConditionerForm.get('gas').invalid && airConditionerForm.get('gas').touched
+                    }">
+              <option *ngFor="let gas of gass" value="{{gas.id}}">{{gas.name}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="airConditionerForm.get('gas').errors && (airConditionerForm.get('gas').touched || airConditionerForm.get('gas').dirty)">
+              <div *ngIf="airConditionerForm.get('gas').errors.required">Bắt buộc</div>
+              <div *ngIf="airConditionerForm.get('gas').errors.maxlength">Thông tin gas chỉ được tối đa là 10 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="brand">Thương hiệu</label>
+            <select class="form-control" name="brand" formControlName="brand">
+              <option *ngFor="let brand of brands" [ngValue]="brand.id" [selected]="brand.id == airConditioner.brandID">{{brand.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" name="description" formControlName="description" [(ngModel)]="airConditioner.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Xuất xứ</label>
+            <input type="text" class="form-control" name="countryOfOrigin" formControlName="countryOfOrigin"
+              [(ngModel)]="airConditioner.countryOfOrigin" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-danger">Huỷ</button>
+          <button type="submit" class="btn btn-success" [disabled]="!airConditionerForm.valid">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

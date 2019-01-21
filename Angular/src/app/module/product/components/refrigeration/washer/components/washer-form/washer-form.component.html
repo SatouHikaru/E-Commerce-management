@@ -1,0 +1,166 @@
+<admin-product-nav></admin-product-nav>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Thêm máy giặt</h4>
+      <form [formGroup]="washerForm" (ngSubmit)="add()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="washer.name"
+              [ngClass]="{
+                    'is-invalid': washerForm.get('name').invalid && washerForm.get('name').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('name').errors && (washerForm.get('name').touched || washerForm.get('name').dirty)">
+              <div *ngIf="washerForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="washerForm.get('name').errors.minlength">Tên sản phẩm phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="washerForm.get('name').errors.maxlength">Tên sản phẩm chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Ảnh sản phẩm</label>
+            <div class="custom-file">
+              <img [src]="image" class="upload-thumbnail" width="200" height="200" />
+              <input type="file" class="form-control-file border" accept="image/jpeg, image/png" formControlName="image"
+                [(ngModel)]="washer.image" (change)="previewImage($event)" [ngClass]="{
+                      'is-invalid': washerForm.get('image').invalid && washerForm.get('image').touched
+                    }" />
+            </div>
+            <div class="invalid-feedback" *ngIf="washerForm.get('image').errors && (washerForm.get('image').touched || washerForm.get('image').dirty)">
+              <div *ngIf="washerForm.get('image').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control" name="price" formControlName="price" [(ngModel)]="washer.price"
+              [ngClass]="{
+                    'is-invalid': washerForm.get('price').invalid && washerForm.get('price').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('price').errors && (washerForm.get('price').touched || washerForm.get('price').dirty)">
+              <div *ngIf="washerForm.get('price').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="number" class="form-control" name="quantity" formControlName="quantity" [(ngModel)]="washer.quantity"
+              [ngClass]="{
+                    'is-invalid': washerForm.get('quantity').invalid && washerForm.get('quantity').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('quantity').errors && (washerForm.get('quantity').touched || washerForm.get('quantity').dirty)">
+              <div *ngIf="washerForm.get('quantity').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="type">Loại</label>
+            <input type="text" class="form-control" name="type" formControlName="type" [(ngModel)]="washer.type"
+              [ngClass]="{
+                      'is-invalid': washerForm.get('type').invalid && washerForm.get('type').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('type').errors && (washerForm.get('type').touched || washerForm.get('type').dirty)">
+              <div *ngIf="washerForm.get('type').errors.required">Bắt buộc</div>
+              <div *ngIf="washerForm.get('type').errors.maxlength">Loại sản phẩm chỉ được tối đa là 20 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="laundryCage">Lồng giặt</label>
+            <input type="text" class="form-control" name="laundryCage" formControlName="laundryCage" [(ngModel)]="washer.laundryCage"
+              [ngClass]="{
+                      'is-invalid': washerForm.get('laundryCage').invalid && washerForm.get('laundryCage').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('laundryCage').errors && (washerForm.get('laundryCage').touched || washerForm.get('laundryCage').dirty)">
+              <div *ngIf="washerForm.get('laundryCage').errors.required">Bắt buộc</div>
+              <div *ngIf="washerForm.get('laundryCage').errors.maxlength">Lồng giặt chỉ được tối đa là 20 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="spinSpeed">Tốc độ quay</label>
+            <input type="text" class="form-control" name="spinSpeed" formControlName="spinSpeed" [(ngModel)]="washer.spinSpeed"
+              [ngClass]="{
+                      'is-invalid': washerForm.get('spinSpeed').invalid && washerForm.get('spinSpeed').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('spinSpeed').errors && (washerForm.get('spinSpeed').touched || washerForm.get('spinSpeed').dirty)">
+              <div *ngIf="washerForm.get('spinSpeed').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="engine">Động cơ</label>
+            <input type="text" class="form-control" name="engine" formControlName="engine" [(ngModel)]="washer.engine"
+              [ngClass]="{
+                      'is-invalid': washerForm.get('engine').invalid && washerForm.get('engine').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('engine').errors && (washerForm.get('engine').touched || washerForm.get('engine').dirty)">
+              <div *ngIf="washerForm.get('engine').errors.required">Bắt buộc</div>
+              <div *ngIf="washerForm.get('engine').errors.maxlength">Động cơ chỉ được tối đa là 50 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="size">Kích thước</label>
+            <input type="text" class="form-control" name="size" formControlName="size" [(ngModel)]="washer.size"
+              [ngClass]="{
+                      'is-invalid': washerForm.get('size').invalid && washerForm.get('size').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="washerForm.get('size').errors && (washerForm.get('size').touched || washerForm.get('size').dirty)">
+              <div *ngIf="washerForm.get('size').errors.required">Bắt buộc</div>
+              <div *ngIf="washerForm.get('size').errors.maxlength">Kích thước chỉ được tối đa là 50 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="weight">Khối lượng</label>
+            <input type="text" class="form-control" name="weight" formControlName="weight" [(ngModel)]="washer.weight" />
+          </div>
+
+          <div class="form-group">
+              <label for="standardTechnology">Tiêu chuẩn công nghệ</label>
+              <input type="text" class="form-control" name="standardTechnology" formControlName="standardTechnology"
+                [(ngModel)]="washer.standardTechnology" [ngClass]="{
+                    'is-invalid': washerForm.get('standardTechnology').invalid && washerForm.get('standardTechnology').touched
+                  }" />
+              <div class="invalid-feedback" *ngIf="washerForm.get('standardTechnology').errors && (washerForm.get('standardTechnology').touched || washerForm.get('standardTechnology').dirty)">
+                <div *ngIf="washerForm.get('standardTechnology').errors.required">Bắt buộc</div>
+                <div *ngIf="washerForm.get('standardTechnology').errors.maxlength">Công nghệ chỉ được tối đa là 20 ký tự</div>
+              </div>
+            </div>
+
+          <div class="form-group">
+            <label for="brand">Thương hiệu</label>
+            <select class="form-control" name="brand" formControlName="brand"
+                [ngClass]="{
+                    'is-invalid': washerForm.get('brand').invalid && washerForm.get('brand').touched
+                  }">
+              <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="washerForm.get('brand').errors && (washerForm.get('brand').touched || washerForm.get('brand').dirty)">
+              <div *ngIf="washerForm.get('brand').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" name="description" formControlName="description" [(ngModel)]="washer.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Xuất xứ</label>
+            <input type="text" class="form-control" name="countryOfOrigin" formControlName="countryOfOrigin"
+              [(ngModel)]="washer.countryOfOrigin" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-danger">Huỷ</button>
+          <button type="submit" class="btn btn-success" [disabled]="!washerForm.valid">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

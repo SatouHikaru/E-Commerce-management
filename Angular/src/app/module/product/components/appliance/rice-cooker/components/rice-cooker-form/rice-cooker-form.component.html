@@ -1,0 +1,128 @@
+<admin-product-nav></admin-product-nav>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Thêm nồi cơm điện</h4>
+      <form [formGroup]="riceCookerForm" (ngSubmit)="add()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="riceCooker.name"
+              [ngClass]="{
+                    'is-invalid': riceCookerForm.get('name').invalid && riceCookerForm.get('name').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="riceCookerForm.get('name').errors && (riceCookerForm.get('name').touched || riceCookerForm.get('name').dirty)">
+              <div *ngIf="riceCookerForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="riceCookerForm.get('name').errors.minlength">Tên sản phẩm phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="riceCookerForm.get('name').errors.maxlength">Tên sản phẩm chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Ảnh sản phẩm</label>
+            <div class="custom-file">
+              <img [src]="image" class="upload-thumbnail" width="200" height="200" />
+              <input type="file" class="form-control-file border" accept="image/jpeg, image/png" formControlName="image"
+                [(ngModel)]="riceCooker.image" (change)="previewImage($event)" [ngClass]="{
+                      'is-invalid': riceCookerForm.get('image').invalid && riceCookerForm.get('image').touched
+                    }" />
+            </div>
+            <div class="invalid-feedback" *ngIf="riceCookerForm.get('image').errors && (riceCookerForm.get('image').touched || riceCookerForm.get('image').dirty)">
+              <div *ngIf="riceCookerForm.get('image').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control" name="price" formControlName="price" [(ngModel)]="riceCooker.price"
+              [ngClass]="{
+                    'is-invalid': riceCookerForm.get('price').invalid && riceCookerForm.get('price').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="riceCookerForm.get('price').errors && (riceCookerForm.get('price').touched || riceCookerForm.get('price').dirty)">
+              <div *ngIf="riceCookerForm.get('price').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="number" class="form-control" name="quantity" formControlName="quantity" [(ngModel)]="riceCooker.quantity"
+              [ngClass]="{
+                    'is-invalid': riceCookerForm.get('quantity').invalid && riceCookerForm.get('quantity').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="riceCookerForm.get('quantity').errors && (riceCookerForm.get('quantity').touched || riceCookerForm.get('quantity').dirty)">
+              <div *ngIf="riceCookerForm.get('quantity').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="volumetric">Thể tích</label>
+            <input type="number" class="form-control" name="volumetric" formControlName="volumetric" [(ngModel)]="riceCooker.volumetric"
+              [ngClass]="{
+                      'is-invalid': riceCookerForm.get('volumetric').invalid && riceCookerForm.get('volumetric').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="riceCookerForm.get('volumetric').errors && (riceCookerForm.get('volumetric').touched || riceCookerForm.get('volumetric').dirty)">
+              <div *ngIf="riceCookerForm.get('volumetric').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="timer">Hẹn giờ</label> <br>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Có" id="yes" name="timer" formControlName="timer"
+                [(ngModel)]="riceCooker.timer" />
+              <label class="custom-control-label" for="yes">Có</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Không" id="no" name="timer" formControlName="timer"
+                [(ngModel)]="riceCooker.timer" />
+              <label class="custom-control-label" for="no">Không</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="standardTechnology">Tiêu chuẩn công nghệ</label>
+            <input type="text" class="form-control" name="standardTechnology" formControlName="standardTechnology"
+              [(ngModel)]="riceCooker.standardTechnology" [ngClass]="{
+                  'is-invalid': riceCookerForm.get('standardTechnology').invalid && riceCookerForm.get('standardTechnology').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="riceCookerForm.get('standardTechnology').errors && (riceCookerForm.get('standardTechnology').touched || riceCookerForm.get('standardTechnology').dirty)">
+              <div *ngIf="riceCookerForm.get('standardTechnology').errors.required">Bắt buộc</div>
+              <div *ngIf="riceCookerForm.get('standardTechnology').errors.maxlength">Công nghệ chỉ được tối đa là 20 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="brand">Thương hiệu</label>
+            <select class="form-control" name="brand" formControlName="brand"
+                [ngClass]="{
+                    'is-invalid': riceCookerForm.get('brand').invalid && riceCookerForm.get('brand').touched
+                  }">
+              <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="riceCookerForm.get('brand').errors && (riceCookerForm.get('brand').touched || riceCookerForm.get('brand').dirty)">
+              <div *ngIf="riceCookerForm.get('brand').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" name="description" formControlName="description" [(ngModel)]="riceCooker.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Xuất xứ</label>
+            <input type="text" class="form-control" name="countryOfOrigin" formControlName="countryOfOrigin"
+              [(ngModel)]="riceCooker.countryOfOrigin" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-danger">Huỷ</button>
+          <button type="submit" class="btn btn-success" [disabled]="!riceCookerForm.valid">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

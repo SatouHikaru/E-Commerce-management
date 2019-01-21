@@ -1,0 +1,108 @@
+<admin-product-nav></admin-product-nav>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Thêm ti vi</h4>
+      <form [formGroup]="televisionForm" (ngSubmit)="update()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="television.name"
+              [ngClass]="{
+                    'is-invalid': televisionForm.get('name').invalid && televisionForm.get('name').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="televisionForm.get('name').errors && (televisionForm.get('name').touched || televisionForm.get('name').dirty)">
+              <div *ngIf="televisionForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="televisionForm.get('name').errors.minlength">Tên sản phẩm phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="televisionForm.get('name').errors.maxlength">Tên sản phẩm chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Ảnh sản phẩm</label>
+            <div class="custom-file">
+              <img [src]="image" class="upload-thumbnail" width="200" />
+              <input type="file" class="form-control-file border" accept="image/jpeg, image/png" formControlName="image"
+                (change)="previewImage($event)" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control" name="price" formControlName="price" [(ngModel)]="television.price"
+              [ngClass]="{
+                    'is-invalid': televisionForm.get('price').invalid && televisionForm.get('price').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="televisionForm.get('price').errors && (televisionForm.get('price').touched || televisionForm.get('price').dirty)">
+              <div *ngIf="televisionForm.get('price').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="number" class="form-control" name="quantity" formControlName="quantity" [(ngModel)]="quantity"
+              [ngClass]="{
+                    'is-invalid': televisionForm.get('quantity').invalid && televisionForm.get('quantity').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="televisionForm.get('quantity').errors && (televisionForm.get('quantity').touched || televisionForm.get('quantity').dirty)">
+              <div *ngIf="televisionForm.get('quantity').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="screenSize">Kích cỡ màn hình</label>
+            <input type="text" class="form-control" name="screenSize" formControlName="screenSize" [(ngModel)]="television.screenSize"
+                [ngClass]="{
+                  'is-invalid': televisionForm.get('screenSize').invalid && televisionForm.get('screenSize').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="televisionForm.get('screenSize').errors && (televisionForm.get('screenSize').touched || televisionForm.get('screenSize').dirty)">
+              <div *ngIf="televisionForm.get('screenSize').errors.required">Bắt buộc</div>
+              <div *ngIf="televisionForm.get('screenSize').errors.maxlength">Tên sản phẩm chỉ được tối đa là 10 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="screenResolution">Độ phân giải</label>
+            <input type="text" class="form-control" name="screenResolution" formControlName="screenResolution"
+                [(ngModel)]="television.screenResolution" [ngClass]="{
+                  'is-invalid': televisionForm.get('screenResolution').invalid && televisionForm.get('screenResolution').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="televisionForm.get('screenResolution').errors && (televisionForm.get('screenResolution').touched || televisionForm.get('screenResolution').dirty)">
+              <div *ngIf="televisionForm.get('screenResolution').errors.required">Bắt buộc</div>
+              <div *ngIf="televisionForm.get('screenResolution').errors.maxlength">Tên sản phẩm chỉ được tối đa là 40 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="imageQuality">Chỉ số chuyển động rõ nét</label>
+            <input type="text" class="form-control" name="imageQuality" formControlName="imageQuality" [(ngModel)]="television.imageQuality" />
+          </div>
+
+          <div class="form-group">
+            <label for="brand">Thương hiệu</label>
+            <select class="form-control" name="brand" formControlName="brand">
+              <option *ngFor="let brand of brands" [ngValue]="brand.id" [selected]="brand.id == television.brandID">{{brand.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" name="description" formControlName="description" [(ngModel)]="television.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Xuất xứ</label>
+            <input type="text" class="form-control" name="countryOfOrigin" formControlName="countryOfOrigin"
+              [(ngModel)]="television.countryOfOrigin" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-danger">Huỷ</button>
+          <button type="submit" class="btn btn-success" [disabled]="!televisionForm.valid">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

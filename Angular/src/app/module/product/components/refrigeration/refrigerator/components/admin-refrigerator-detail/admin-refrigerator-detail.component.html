@@ -1,0 +1,130 @@
+<admin-product-nav></admin-product-nav>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Thêm tủ lạnh</h4>
+      <form [formGroup]="refrigeratorForm" (ngSubmit)="update()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="refrigerator.name"
+              [ngClass]="{
+                    'is-invalid': refrigeratorForm.get('name').invalid && refrigeratorForm.get('name').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="refrigeratorForm.get('name').errors && (refrigeratorForm.get('name').touched || refrigeratorForm.get('name').dirty)">
+              <div *ngIf="refrigeratorForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="refrigeratorForm.get('name').errors.minlength">Tên sản phẩm phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="refrigeratorForm.get('name').errors.maxlength">Tên sản phẩm chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Ảnh sản phẩm</label>
+            <div class="custom-file">
+              <img [src]="image" class="upload-thumbnail" width="200" height="200" />
+              <input type="file" class="form-control-file border" accept="image/jpeg, image/png" formControlName="image" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control" name="price" formControlName="price" [(ngModel)]="refrigerator.price"
+              [ngClass]="{
+                    'is-invalid': refrigeratorForm.get('price').invalid && refrigeratorForm.get('price').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="refrigeratorForm.get('price').errors && (refrigeratorForm.get('price').touched || refrigeratorForm.get('price').dirty)">
+              <div *ngIf="refrigeratorForm.get('price').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="number" class="form-control" name="quantity" formControlName="quantity" [(ngModel)]="quantity"
+              [ngClass]="{
+                    'is-invalid': refrigeratorForm.get('quantity').invalid && refrigeratorForm.get('quantity').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="refrigeratorForm.get('quantity').errors && (refrigeratorForm.get('quantity').touched || refrigeratorForm.get('quantity').dirty)">
+              <div *ngIf="refrigeratorForm.get('quantity').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="size">Kích thước</label>
+            <input type="text" class="form-control" name="size" formControlName="size" [(ngModel)]="refrigerator.size"
+              [ngClass]="{
+                      'is-invalid': refrigeratorForm.get('size').invalid && refrigeratorForm.get('size').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="refrigeratorForm.get('size').errors && (refrigeratorForm.get('size').touched || refrigeratorForm.get('size').dirty)">
+              <div *ngIf="refrigeratorForm.get('size').errors.required">Bắt buộc</div>
+              <div *ngIf="refrigeratorForm.get('size').errors.maxlength">Kích thước chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="weight">Trọng lượng</label>
+            <input type="number" class="form-control" name="weight" formControlName="weight" [(ngModel)]="refrigerator.weight" />
+          </div>
+
+          <div class="form-group">
+            <label for="maxVolumetric">Tổng dung tích</label>
+            <input type="number" class="form-control" name="maxVolumetric" formControlName="maxVolumetric" [(ngModel)]="refrigerator.maxVolumetric"
+              [ngClass]="{
+                      'is-invalid': refrigeratorForm.get('maxVolumetric').invalid && refrigeratorForm.get('maxVolumetric').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="refrigeratorForm.get('maxVolumetric').errors && (refrigeratorForm.get('maxVolumetric').touched || refrigeratorForm.get('maxVolumetric').dirty)">
+              <div *ngIf="refrigeratorForm.get('maxVolumetric').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="freezerVolumetric">Dung tích ngăn lạnh</label>
+            <input type="number" class="form-control" name="freezerVolumetric" formControlName="freezerVolumetric"
+              [(ngModel)]="refrigerator.freezerVolumetric" />
+          </div>
+
+          <div class="form-group">
+            <label for="iceCubesVolumetric">Dung tích ngăn đá</label>
+            <input type="number" class="form-control" name="iceCubesVolumetric" formControlName="iceCubesVolumetric"
+              [(ngModel)]="refrigerator.iceCubesVolumetric" />
+          </div>
+
+          <div class="form-group">
+            <label for="coolingTechnology">Công nghệ làm lạnh</label>
+            <input type="text" class="form-control" name="coolingTechnology" formControlName="coolingTechnology"
+              [(ngModel)]="refrigerator.coolingTechnology" [ngClass]="{
+                      'is-invalid': refrigeratorForm.get('coolingTechnology').invalid && refrigeratorForm.get('coolingTechnology').touched
+                    }" />
+            <div class="invalid-feedback" *ngIf="refrigeratorForm.get('coolingTechnology').errors && (refrigeratorForm.get('coolingTechnology').touched || refrigeratorForm.get('coolingTechnology').dirty)">
+              <div *ngIf="refrigeratorForm.get('coolingTechnology').errors.required">Bắt buộc</div>
+              <div *ngIf="refrigeratorForm.get('coolingTechnology').errors.maxlength">Công nghệ làm mát chỉ được tối đa là 100 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="brand">Thương hiệu</label>
+            <select class="form-control" name="brand" formControlName="brand">
+              <option *ngFor="let brand of brands" [ngValue]="brand.id" [selected]="brand.id == refrigerator.brandID">{{brand.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" name="description" formControlName="description" [(ngModel)]="refrigerator.description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Xuất xứ</label>
+            <input type="text" class="form-control" name="countryOfOrigin" formControlName="countryOfOrigin"
+              [(ngModel)]="refrigerator.countryOfOrigin" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-danger">Huỷ</button>
+          <button type="submit" class="btn btn-success" [disabled]="!refrigeratorForm.valid">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

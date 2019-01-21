@@ -1,0 +1,130 @@
+<admin-header></admin-header>
+<div class="container">
+  <div class="row row_disable">
+    <div class="col-lg-6 offset-lg-3">
+      <h4 class="modal-title text-center">Thông tin cá nhân</h4>
+      <form [formGroup]="employeeForm" (ngSubmit)="update()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="avatar">Ảnh đại diện</label>
+            <div class="custom-file">
+              <img [src]="avatar" class="upload-thumbnail" width="200" />
+              <input type="file" class="form-control-file border" accept="image/jpeg, image/png" formControlName="avatar"
+                (change)="previewImage($event)" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Họ tên</label>
+            <input type="text" class="form-control" name="name" formControlName="name" [(ngModel)]="employee.name"
+              [ngClass]="{
+                    'is-invalid': employeeForm.get('name').invalid && employeeForm.get('name').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="employeeForm.get('name').errors && (employeeForm.get('name').touched || employeeForm.get('name').dirty)">
+              <div *ngIf="employeeForm.get('name').errors.required">Bắt buộc</div>
+              <div *ngIf="employeeForm.get('name').errors.minlength">Họ tên phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="employeeForm.get('name').errors.maxlength">Họ tên chỉ có tối đa 60 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Giới tính</label> <br>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Nam" id="male" name="gender" formControlName="gender"
+                [(ngModel)]="employee.gender" />
+              <label class="custom-control-label" for="male">Nam</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" value="Nữ" id="female" name="gender" formControlName="gender"
+                [(ngModel)]="employee.gender" />
+              <label class="custom-control-label" for="female">Nữ</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="birthday">Ngày sinh</label>
+            <input type="text" class="form-control" name="birthday" formControlName="birthday" [value]="employee.birthday | date:'dd/MM/yyyy'"
+              [ngClass]="{
+                    'is-invalid': employeeForm.get('birthday').invalid && employeeForm.get('birthday').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="employeeForm.get('birthday').errors && (employeeForm.get('birthday').touched || employeeForm.get('birthday').dirty)">
+              <div *ngIf="employeeForm.get('birthday').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Điện thoại</label>
+            <input type="text" class="form-control" name="phone" formControlName="phone" [(ngModel)]="employee.phone"
+              [ngClass]="{
+                    'is-invalid': employeeForm.get('phone').invalid && employeeForm.get('phone').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="employeeForm.get('phone').errors && (employeeForm.get('phone').touched || employeeForm.get('phone').dirty)">
+              <div *ngIf="employeeForm.get('phone').errors.required">Bắt buộc</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" formControlName="email" [(ngModel)]="employee.email"
+              [ngClass]="{
+                    'is-invalid': employeeForm.get('email').invalid && employeeForm.get('email').touched
+                  }" />
+            <div class="invalid-feedback" *ngIf="employeeForm.get('email').errors && (employeeForm.get('email').touched || employeeForm.get('name').dirty)">
+              <div *ngIf="employeeForm.get('email').errors.required">Bắt buộc</div>
+              <div *ngIf="employeeForm.get('email').errors.minlength">Email phải có tối thiểu 2 ký tự</div>
+              <div *ngIf="employeeForm.get('email').errors.maxlength">Email chỉ có tối đa 60 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Tên đăng nhập</label>
+            <input type="text" class="form-control" disabled name="userName" formControlName="userName" [(ngModel)]="employee.userName" />
+          </div>
+
+          <div class="form-group">
+            <label for="oldPassword">Mật khẩu</label>
+            <input type="password" class="form-control" name="oldPassword" formControlName="oldPassword" [(ngModel)]="account.password"
+                [ngClass]="{
+                  'is-invalid': employeeForm.get('oldPassword').invalid && employeeForm.get('oldPassword').touched
+                }" />
+            <div class="invalid-feedback" *ngIf="employeeForm.get('oldPassword').errors && (employeeForm.get('oldPassword').touched || employeeForm.get('oldPassword').dirty)">
+              <div *ngIf="employeeForm.get('oldPassword').errors.required">Bắt buộc</div>
+              <div *ngIf="employeeForm.get('oldPassword').errors.minlength">Mật khẩu phải có tối thiểu 6 ký tự</div>
+              <div *ngIf="employeeForm.get('oldPassword').errors.maxlength">Mật khẩu chỉ có tối đa 40 ký tự</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="changePassword" name="changePassword" (click)="changePassword($event)">
+              <label class="custom-control-label" for="changePassword">Thay đổi mật khẩu </label>
+            </div>
+          </div>
+
+          <div [className]="checked ? '' : 'd-none'">
+            <div class="form-group">
+              <label for="newPassword">Mật khẩu mới</label>
+              <input type="password" class="form-control" name="newPassword" formControlName="newPassword" [(ngModel)]="newPassword" />
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Xác nhận mật khẩu</label>
+              <input type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword"
+                [(ngModel)]="confirmPassword" />
+            </div>
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="message != ''">
+            {{message}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" (click)="goBack()">Quay lại</button>
+          <button type="reset" class="btn btn-warning">Huỷ</button>
+          <button type="submit" class="btn btn-success">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

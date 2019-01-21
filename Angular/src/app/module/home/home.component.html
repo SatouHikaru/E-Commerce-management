@@ -1,0 +1,95 @@
+<nav></nav>
+<div class="home_sidebar_area">
+  <div class="container">
+    <div class="row row_disable">
+      <div class="col-lg-9 float-md-right">
+        <div class="row row_disable">
+          <div class="categories_product_area home">
+            <div class="row">
+              <div class="col-lg-4 col-sm-6" *ngFor="let product of products">
+                <div class="l_product_item">
+                  <div class="l_p_img">
+                    <img src="{{product.image}}" alt="{{product.name}}" width="270px" height="320px">
+                    <h5 class="new">Mới</h5>
+                  </div>
+                  <div class="l_p_text">
+                    <ul>
+                      <li *ngIf="product.productType == 'Ti vi'">
+                        <a class="add_cart_btn" [routerLink]="['/electrics/televisions', product.name]">Xem chi tiết</a>
+                      </li>
+                      <li *ngIf="product.productType == 'Đầu đĩa DVD'">
+                        <a class="add_cart_btn" [routerLink]="['/electrics/dvd-players', product.name]">Xem chi tiết</a>
+                      </li>
+                      <li *ngIf="product.productType == 'Máy giặt'">
+                        <a class="add_cart_btn" [routerLink]="['/refrigerations/washers', product.name]">Xem chi tiết</a>
+                      </li>
+                      <li *ngIf="product.productType == 'Tủ lạnh'">
+                        <a class="add_cart_btn" [routerLink]="['/refrigerations/refrigerators', product.name]">Xem chi tiết</a>
+                      </li>
+                      <li *ngIf="product.productType == 'Điều hoà'">
+                        <a class="add_cart_btn" [routerLink]="['/refrigerations/air-conditioners', product.name]">Xem chi tiết</a>
+                      </li>
+                      <li *ngIf="product.productType == 'Nồi cơm điện'">
+                        <a class="add_cart_btn" [routerLink]="['/appliances/rice-cookers', product.name]">Xem chi tiết</a>
+                      </li>
+                      <li *ngIf="product.productType == 'Bộ định tuyến'">
+                        <a class="add_cart_btn" [routerLink]="['/accessories/wireless-routers', product.name]">Xem chi tiết</a>
+                      </li>
+                    </ul>
+                    <h4>{{product.name}}</h4>
+                    <h5>{{product.price | number}} VND</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 float-md-right">
+        <div class="left_sidebar_area">
+          <div class="l_widget l_categories_widget">
+            <div class="l_title">
+              <h3>Loại sản phẩm</h3>
+            </div>
+            <ul>
+              <li><a routerLink="/electrics/televisions">Điện tử</a></li>
+              <li><a routerLink="/refrigerations/washers">Điện lạnh</a></li>
+              <li><a routerLink="/appliances/rice-cookers">Điện gia dụng</a></li>
+              <li><a routerLink="/accessories/wireless-routers">Phụ kiện</a></li>
+            </ul>
+          </div>
+          <div class="l_widget l_news_widget">
+            <h3 style="margin-bottom: 8%;">Theo dõi</h3>
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Email">
+              <span class="input-group-btn">
+                <button class="btn btn-secondary subs_btn" type="button">Subscribe</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="world_service">
+  <div class="container">
+    <div class="world_service_inner">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="world_service_item">
+            <h4><img src="assets/images/icon/world-icon-1.png" alt="">Thanh toán an toàn</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="world_service_item">
+            <h4><img src="assets/images/icon/world-icon-2.png" alt="">Giao hàng nhanh</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

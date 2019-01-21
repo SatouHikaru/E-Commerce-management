@@ -1,0 +1,20 @@
+<ul class="pagination" *ngIf="pager.pages && pager.pages.length">
+  <li [ngClass]="{ 'page-item disabled': pager.currentPage == 1 }">
+    <a class="page-link" (click)="setPage(1, false)">«</a>
+  </li>
+  <li [ngClass]="{ 'page-item disabled': pager.currentPage == 1 }">
+    <a class="page-link" (click)="setPage(pager.currentPage - 1, false)">‹</a>
+  </li>
+  <li *ngFor="let page of pager.pages" [ngClass]="{ 'page-item active': pager.currentPage == page }">
+    <a class="page-link" (click)="setPage(page, false)">{{page}}</a>
+  </li>
+  <li class="page-item" [ngClass]="{ 'd-none': pager.totalPages - 1 < 5 || pager.currentPage >= pager.totalPages - 2 }">
+    <a class="page-link" (click)="setPage(pager.currentPage + 5, true)">...</a>
+  </li>
+  <li [ngClass]="{ 'page-item disabled': pager.currentPage == pager.totalPages }">
+    <a class="page-link" (click)="setPage(pager.currentPage + 1, false)">›</a>
+  </li>
+  <li [ngClass]="{ 'page-item disabled': pager.currentPage == pager.totalPages }">
+    <a class="page-link" (click)="setPage(pager.totalPages, false)">»</a>
+  </li>
+</ul>

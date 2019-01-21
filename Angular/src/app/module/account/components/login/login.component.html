@@ -1,0 +1,47 @@
+<nav></nav>
+<div class="container">
+    <div class="row row_disable">
+        <div class="col-lg-6 offset-lg-3">
+            <h4 class="modal-title text-center">Đăng nhập</h4>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="userName">Tên đăng nhập</label>
+                        <input type="text" class="form-control" name="userName" formControlName="userName" [(ngModel)]="account.userName"
+                                [ngClass]="{
+                                    'is-invalid': loginForm.get('userName').invalid && loginForm.get('userName').touched
+                                }" />
+                        <div class="invalid-feedback" *ngIf="loginForm.get('userName').errors && (loginForm.get('userName').touched || loginForm.get('userName').dirty)">
+                            <div *ngIf="loginForm.get('userName').errors.required">Bắt buộc</div>
+                            <div *ngIf="loginForm.get('userName').errors.minlength">Tên đăng nhập phải có tối thiểu 6
+                                ký tự</div>
+                            <div *ngIf="loginForm.get('userName').errors.maxlength">Tên đăng nhập chỉ có tối đa 30 ký
+                                tự</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" class="form-control" name="password" formControlName="password" [(ngModel)]="account.password"
+                                [ngClass]="{
+                                    'is-invalid': loginForm.get('password').invalid && loginForm.get('password').touched
+                                }" />
+                        <div class="invalid-feedback" *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)">
+                            <div *ngIf="loginForm.get('password').errors.required">Bắt buộc</div>
+                            <div *ngIf="loginForm.get('password').errors.minlength">Mật khẩu phải có tối thiểu 6 ký tự</div>
+                            <div *ngIf="loginForm.get('password').errors.maxlength">Mật khẩu chỉ có tối đa 30 ký tự</div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="message != ''">
+                        {{message}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" (click)="goBack()">Quay lại</button>
+                    <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Đăng nhập</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer></footer>

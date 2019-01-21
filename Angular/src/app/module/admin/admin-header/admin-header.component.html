@@ -1,0 +1,86 @@
+<div class="carousel_menu_inner">
+    <div class="container">
+        <div class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" routerLink="/admin"><img src="assets/images/logo.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li [className]="url == '/admin' ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" routerLink="/admin">Trang chủ</a>
+                    </li>
+                    <li [className]="url == '/electrics/televisions' || url == '/refrigerations' ||
+                            url == '/appliances' || url == '/accessories' ? 'nav-item active dropdown submenu' : 'nav-item dropdown submenu'">
+                        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Quản lý <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li [className]="url == '/electrics' ? 'nav-item active' : 'nav-item'">
+                                <a class="nav-link" routerLink="/admin/electrics/televisions">Sản phẩm</a>
+                            </li>
+                            <li [className]="url == '/admin/orders' ? 'nav-item active' : 'nav-item'">
+                                <a class="nav-link" routerLink="/admin/orders">Đơn hàng</a>
+                            </li>
+
+                            <div *ngIf="!isAdmin">
+                                <li [className]="url == '/admin/customers' ? 'nav-item active' : 'nav-item'">
+                                    <a class="nav-link" routerLink="/admin/customers">Khách hàng</a>
+                                </li>
+                            </div>
+
+                            <li [className]="url == '/admin/feedbacks' ? 'nav-item active' : 'nav-item'">
+                                <a class="nav-link" routerLink="/admin/feedbacks">Phản hồi</a>
+                            </li>
+
+                            <div *ngIf="isAdmin">
+                                <li [className]="url == '/admin/customers' ? 'nav-item active' : 'nav-item'">
+                                    <a class="nav-link" routerLink="/admin/customers">Tài khoản</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+                    <li [className]="url == '/admin/statistic' ? 'nav-item active' : 'nav-item'">
+                        <div *ngIf="isAdmin">
+                            <a class="nav-link" routerLink="/admin/statistic">Thống kê</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav justify-content-end">
+                    <div *ngIf="!isLoggedIn">
+                        <div class="dropdown user">
+                            <li class="user_icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <a><i class="icon-user icons"></i></a>
+                            </li>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" (click)="goToRegister()">Đăng ký</a>
+                                <a class="dropdown-item" (click)="goToLogin()">Đăng nhập</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isLoggedIn">
+                        <div class="dropdown">
+                            <li class="user_icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <img src="{{avatar}}" width="48">
+                            </li>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div *ngIf="!isAdmin">
+                                    <a class="dropdown-item" (click)="seeInfo()">Thông tin cá nhân</a>
+                                </div>
+                                <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div *ngIf="url == '/admin'">
+            <h2 class="text-center">CHÀO MỪNG BẠN ĐẾN VỚI TRANG QUẢN LÝ</h2>
+        </div>
+    </div>
+</div>

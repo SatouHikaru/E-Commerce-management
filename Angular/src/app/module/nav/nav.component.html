@@ -1,0 +1,79 @@
+<header></header>
+<div class="carousel_menu_inner">
+  <div class="container">
+    <div class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" routerLink=""><img src="assets/images/logo.png" alt="logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li [className]="url == '/' ? 'nav-item active' : 'nav-item'"><a class="nav-link" routerLink="/">Trang chủ</a></li>
+          <li [className]="url == '/electrics/televisions' || url == '/refrigerations/refrigerators' ||
+              url == '/appliances/electric-fans' || url == '/accessories/wireless-routers'
+              ? 'nav-item active dropdown submenu' : 'nav-item dropdown submenu'">
+            <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sản phẩm <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li [className]="url == '/electrics/televisions' ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" routerLink="/electrics/televisions">Điện tử</a>
+              </li>
+              <li [className]="url == '/refrigerations/refrigerators' ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" routerLink="/refrigerations/washers">Điện lạnh</a>
+              </li>
+              <li [className]="url == '/appliances/rice-cookers' ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" routerLink="/appliances/rice-cookers">Điện gia dụng</a>
+              </li>
+              <li [className]="url == '/accessories/wireless-routers' ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" routerLink="/accessories/wireless-routers">Phụ kiện</a>
+              </li>
+            </ul>
+          </li>
+          <li [className]="url == '/introduce' ? 'nav-item active' : 'nav-item'"><a class="nav-link" routerLink="/introduce">Giới thiệu</a></li>
+          <li [className]="url == '/contact' ? 'nav-item active' : 'nav-item'"><a class="nav-link" routerLink="/contact">Liên hệ</a></li>
+        </ul>
+        <ul class="navbar-nav justify-content-end">
+          <div *ngIf="isLoggedIn">
+            <div class="dropdown cart">
+              <li class="cart_cart dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="cart-list"><i class="icon-handbag icons"></i></a>
+              </li>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div *ngFor="let order of orders">
+                  <a class="dropdown-item" (click)="seeDetail(order.id, order.customerID)">Đơn hàng {{order.id}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!isLoggedIn">
+            <div class="dropdown user">
+              <li class="user_icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a><i class="icon-user icons"></i></a>
+              </li>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="goToRegister()">Đăng ký</a>
+                <a class="dropdown-item" (click)="goToLogin()">Đăng nhập</a>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="isLoggedIn">
+            <div class="dropdown">
+              <li class="user_icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{avatar}}" width="48">
+              </li>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" (click)="seeInfo()">Thông tin cá nhân</a>
+                <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

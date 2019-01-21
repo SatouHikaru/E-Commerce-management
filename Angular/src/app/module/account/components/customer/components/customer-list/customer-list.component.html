@@ -1,0 +1,58 @@
+<div *ngIf="isAdmin">
+    <admin-account-nav></admin-account-nav>
+</div>
+
+<div *ngIf="!isAdmin">
+    <admin-header></admin-header>
+</div>
+
+<div class="container">
+    <div class="categories_main_inner">
+        <div class="row row_disable">
+            <h3 class="text-center">DANH SÁCH KHÁCH HÀNG</h3>
+            <div class="row filter ml-1 mt-5">
+                <div class="col-lg-4 input-group">
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" [(ngModel)]="keySearch" aria-label="Search">&nbsp;&nbsp;
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" [className]="keySearch == '' ? 'btn disabled' : 'btn'"
+                                (click)="getByKeySearch(currentPage - 1)">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <button type="button" class="btn btn-success" (click)="getAll()">Toàn bộ khách hàng</button>&nbsp;
+            </div>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th class="align-middle text-center">Mã</th>
+                        <th class="align-middle text-center" colspan="2">Tên</th>
+                        <th class="align-middle text-center">Giới tính</th>
+                        <th class="align-middle text-center">Ngày sinh</th>
+                        <th class="align-middle text-center">Điện thoại</th>
+                        <th class="align-middle text-center">Email</th>
+                        <th class="align-middle text-center">Tài khoản</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let customer of pagedItems">
+                    <tr>
+                        <td class="align-middle text-center">{{customer.id}}</td>
+                        <td><img src="{{customer.avatar}}" alt="{{customer.name}}" width="100"></td>
+                        <td class="align-middle">{{customer.name}}</td>
+                        <td class="align-middle text-center">{{customer.gender}}</td>
+                        <td class="align-middle text-center">{{customer.birthday | date:'dd/MM/yyyy'}}</td>
+                        <td class="align-middle text-center">{{customer.phone}}</td>
+                        <td class="align-middle text-center">{{customer.email}}</td>
+                        <td class="align-middle text-center">{{customer.userName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <pagination [currentPage]=(currentPage) [setTotalItems]=(totalItems) (changePage)="pageChanged($event)"></pagination>
+            </div>
+        </div>
+    </div>
+</div>

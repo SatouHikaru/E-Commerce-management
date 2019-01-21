@@ -1,0 +1,47 @@
+<admin-header></admin-header>
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-lg-4">
+      <div class="form-group input-group">
+        <h6 class="mt-2 mr-2">Ngày bắt đầu</h6>
+        <input type="date" class="form-control" name="startDate" [(ngModel)]="startDate" />
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="form-group input-group">
+        <h6 class="mt-2 mr-2">Ngày kết thúc </h6>
+        <input type="date" class="form-control" name="endDate" [(ngModel)]="endDate" />
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <button type="button" class="btn btn-primary" (click)="statistic()" [disabled]="startDate == null || endDate == null || startDate > endDate">Thống
+        kê</button>
+    </div>
+  </div>
+
+  <div *ngIf="hasStatistic">
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th class="align-middle text-center">STT</th>
+          <th class="align-middle text-center">Loại sản phẩm</th>
+          <th class="align-middle text-center">Số lượng bán được</th>
+          <th class="align-middle text-center">Doanh thu</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let product of PRODUCTS; let i = index">
+        <tr>
+          <td class="align-middle text-center">{{i + 1}}</td>
+          <td class="align-middle text-center">{{product.productType}}</td>
+          <td class="align-middle text-center">{{product.quantity}}</td>
+          <td class="align-middle text-center">{{product.revenue | number}} VND</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="chartContainer"></div>
+
+</div>
